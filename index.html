@@ -21,6 +21,14 @@
     .markdown-section img { border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,.12); }
     .markdown-section code { background: #f3f3f3; }
 
+    /* 코드 주석 — 이 교재는 한글 주석이 설명의 절반이라, 흐린 회색 대신
+       Colab/GitHub 처럼 녹색 · 정자체로 또렷하게 보여준다 */
+    .markdown-section pre .token.comment,
+    .markdown-section pre .token.triple-quoted-string {
+      color: #1a7f37;
+      font-style: normal;
+    }
+
     /* README 상단의 Pages 링크 — GitHub 에서 볼 때만 필요하므로 사이트에서는 숨긴다 */
     .markdown-section .gh-only { display: none; }
 
@@ -161,6 +169,9 @@
 
   <!-- Docsify 본체 (빌드 과정 없이 CDN 스크립트만으로 동작) -->
   <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
+
+  <!-- 파이썬 구문 강조 (docsify 내장 Prism 은 python 을 기본 포함하지 않는다) -->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js"></script>
 
   <!-- 검색 플러그인 -->
   <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
