@@ -1,87 +1,65 @@
-# LLM 심화 교재 (PPT → md)
+# LLM 심화 — Transformer 와 LLMs
 
-원본: `LLM.pptx` 161장. 강의 전체(Chapter 1~5) 중 **Chapter 4·5 만** 슬라이드가 있어,
-그 둘을 **독립 교재의 1·2장으로 재번호**했다. Topic Review 는 부록 A 로 분리했다.
+사전학습 LLM 을 **내 문제에 맞게 조정하고(Fine-tuning)**, **행동하는 시스템(AI
+Agent)으로 확장**하는 방법을 다루는 교재다. 강의 "Transformer 와 LLMs"(홍근선,
+㈜한국AI연구소)의 슬라이드를 읽는 글로 다시 쓴 것으로, 모든 실습은 Google Colab
+노트북과 함께 제공된다.
 
-    구 Chapter 4 (LLM fine tuning)   →  1장  LLM Fine-tuning
-    구 Chapter 5 (AI Agent)          →  2장  AI Agent
-    Transformer 응용 : Topic Review  →  부록 A
+1장에서는 Hugging Face 에서 모델을 구해 실행하는 것에서 시작해 Trainer 기반
+Fine-tuning 과 LoRA · Unsloth · GGUF 까지, 2장에서는 Agent 의 개념에서 시작해
+LangChain(RAG) · LangGraph · Tracing 까지 나아간다. 부록에서는 Agentic AI 를
+Ontology · Knowledge Graph 와 결합하는 그림을 정리한다.
 
-## 현재 상태 (집필 완료 · 배포 전)
+## 목차
 
-| 항목 | 상태 |
-|---|---|
-| 슬라이드 배정 | **161 / 161** · 누락 0 · 중복 0 |
-| 원문 덤프 | 9개 절 전부 생성 (`*/＿원문/N.M_원문.txt`) |
-| 이미지 추출 | 삽입 그림 251장 + 슬라이드 렌더 68장 |
-| 실습 코드 덤프 | 7개 절 · 23개 노트북 · 426,355자 |
-| 집필 | **11개 파일 전부 완료** (교재개요·1.0~1.3·2.0~2.4·부록A) · 슬라이드 161/161 배정 · 깨진 링크 0 |
+**[교재 개요와 전체 목차](00_교재개요.md)** — 강의 전체에서 이 교재가 다루는 범위와
+장 번호 대응
 
-## 절 구성
+**1장 LLM Fine-tuning** — [장 개요](ch01_LLM파인튜닝/00_1장개요_장개요.md)
 
-| 절 | 제목 | 슬라이드 | 장수 | 본문자수 | 그림 | 노트북 |
-|---|---|---|---|---|---|---|
-| — | 교재 개요·목차 | 1~4, 160~161 | 6 | 1,037 | 1 | — |
-| 1.0 | 1장 개요 | 5~6, 32, 46 | 4 | 253 | 1 | — |
-| 1.1 | Hugging Face 와 LLM | 7~31 | 25 | 6,082 | 50 | 2 |
-| 1.2 | LLM Fine-tuning | 33~45 | 13 | **1,481** | 30 | 4 |
-| 1.3 | LoRA 를 이용한 Fine-tuning | 47~69 | 23 | 6,388 | 41 | 4 |
-| 2.0 | 2장 개요 | 70~74, 88, 110, 126 | 8 | 330 | 1 | — |
-| 2.1 | AI Agent 개요 | 75~87 | 13 | 6,408 | 11 | 0 |
-| 2.2 | LangChain 과 RAG | 89~109 | 21 | 7,054 | 24 | 6 |
-| 2.3 | LangGraph 활용 | 111~125 | 15 | 4,409 | 32 | 5 |
-| 2.4 | LangGraph Tracing | 127~149 | 23 | 3,135 | 56 | 2 |
-| A | Agentic AI 와 Ontology | 150~159 | 10 | 4,904 | 4 | 1 |
+- [1.1 Hugging Face 와 LLM](ch01_LLM파인튜닝/1.1_HuggingFace와LLM.md) — 계정과
+  Access Token, Transformers 라이브러리, Pipeline 실습, 동적 양자화, ChatBot,
+  Multi-modal 모델
+- [1.2 LLM Fine-tuning](ch01_LLM파인튜닝/1.2_FineTuning.md) — Trainer 기반 표준
+  절차, IMDB · 한국어 영화 리뷰 감성 분류 실습
+- [1.3 LoRA 를 이용한 Fine-tuning](ch01_LLM파인튜닝/1.3_LoRA.md) — PEFT 와 LoRA 의
+  원리, 한국어 감성 분석 · Qwen3-14B Reasoning 실습, GGUF 저장과 llama.cpp 실행
 
-숨김 슬라이드: 31 · 71 · 72 · 73 · 87 · 109 · 161 (MEMO·공백).
-PDF 변환에서 빠지므로 `render.pdf_page()` 가 페이지 번호를 보정한다.
+**2장 AI Agent** — [장 개요](ch02_AIAgent/00_2장개요_장개요.md)
 
-## 집필 시작 전에 알아야 할 것
+- [2.1 AI Agent 개요](ch02_AIAgent/2.1_AIAgent개요.md) — Planning · Memory · Tool
+  use, 대표 연구(CoT/ToT/ReAct/Reflexion)와 Agent framework 비교
+- [2.2 LangChain 과 RAG](ch02_AIAgent/2.2_LangChain과RAG.md) — Agent 구조 직접
+  만들기, LangChain ReAct/Custom Agent, RAG 파이프라인과 Query Augment · Chunking
+  설계
+- [2.3 LangGraph 활용](ch02_AIAgent/2.3_LangGraph.md) — State · Node · Edge, 병렬 ·
+  조건부 분기 · 재시도 루프, Multi-Agent 협업, MCP, AI-Ready Data
+- [2.4 LangGraph Tracing](ch02_AIAgent/2.4_Tracing.md) — LangSmith · LangFuse 관측,
+  Prompt 버전 관리와 A/B 실험 · 평가
 
-1. **`_집필지침.md` 의 §0 을 먼저 읽는다.** ADA 교재 지침과 다른 점 네 가지가 거기 있다.
-2. **실습에는 원문 번호가 없다.** 새로 부여하고 노트북 파일명을 병기한다
-   (`config.NOTEBOOK_MAP` 에 23개 대응이 있다).
-3. **`fig…` 68장은 대부분 쓰지 않는다.** 코드 스크린샷이 겹친 슬라이드를
-   `is_diagram()` 이 과하게 잡은 것이다.
-4. **1.2 가 유독 얇다.** 13장에 본문 1,481자, 그림 30장 — 전부 "제목 한 줄 + 코드
-   스크린샷" 이다. 노트북 코드와 설명으로 채워야 교재가 된다 (지침 §9).
-5. **2.1 에는 대응 노트북이 없다.** 개념 절이라 정상이다.
+**부록**
 
-## 폴더
+- [부록 A. Agentic AI 와 Ontology](부록A_AgenticAI/부록A_AgenticAI.md) — LLM ·
+  Ontology · Knowledge Graph · GNN 파이프라인과 Palantir 의 접근 방식
 
-```
-교재_ppt_md/
-├── _집필지침.md            ← 집필 규칙 (먼저 읽을 것)
-├── _tools/
-│   ├── ada_pptx2md/       ← 변환·검증 패키지
-│   └── 교재.css            ← 본문 11pt · 코드 9.5pt
-├── ch01_LLM파인튜닝/
-│   ├── _원문/1.1_원문.txt         ← 슬라이드 원문 덤프 (집필 재료)
-│   ├── _원문/1.1_실습코드.txt     ← 노트북 실제 코드
-│   └── images/                   ← 그림
-├── ch02_AIAgent/
-└── 부록A_AgenticAI/
-```
+## 실습 안내
 
-## 남은 작업
+각 실습 제목 아래의 **"Open in Colab" 배지**를 누르면 노트북이 Colab 에서 바로
+열린다. 노트북 파일은 이 저장소의 [`code/`](https://github.com/AI-BoostCamp/AgenticAI/tree/main/code)
+폴더에 교재의 실습 번호와 같은 이름으로 들어 있다.
 
-1. `_추가검토.md` 의 "사람이 확정할 것" 검토 (공용 계정 제외, 모델 불일치, 제외 노트북 등)
-2. `imgsize` 로 그림 폭 정리, `sweep_unused()` 로 미사용 그림 정리
-3. GitHub `AI-BoostCamp/AgenticAI` 저장소 생성 후 `교재_md/` 내용을 루트로 push
-   (public 이어야 본문의 Colab 링크가 동작한다. `code/` 에 새 번호 노트북 사본 포함됨)
+실행 전 준비:
 
-## 작업 순서 (집필 시 따랐던 절차)
+- **GPU 런타임** — 대부분의 실습은 Colab 의 GPU(T4/L4 급 이상)를 사용한다.
+- **Hugging Face 토큰** — 계정을 만들고 Access Token 을 발급받아 Colab 보안
+  비밀(secrets)에 `HF_TOKEN` 이름으로 저장한다. 절차는
+  [1.1 절](ch01_LLM파인튜닝/1.1_HuggingFace와LLM.md)에서 다룬다. 토큰을 노트북
+  파일에 직접 적지 않는 것이 원칙이다.
+- **2장 실습의 추가 키** — 2.2~2.4 의 일부 실습은 `OPENAI_API_KEY` 를, 2.4 의
+  tracing 실습은 `LANGSMITH_API_KEY` · `LANGFUSE_PUBLIC_KEY` ·
+  `LANGFUSE_SECRET_KEY` 를 같은 방식으로 Colab 보안 비밀에 등록해 사용한다.
 
-절 하나를 끝내고 확인을 받은 뒤 다음으로 간다. 한 번에 여러 절을 하지 않는다.
+## 저자
 
-```
-_원문 읽기 → 슬라이드 한 장씩 수동 대조 → 집필
-  → trace_report() 미배정 0 → check_links() 깨진 링크 0
-  → 사용자 확인 → 다음 절
-```
-
-## 배포
-
-`https://github.com/AI-BoostCamp` 조직에 저장소를 만들고 docsify 로 GitHub Pages 에 올린다.
-구성은 ADA 교재(`skku-ada/26h2`)와 같다 — `index.html` 한 파일 + md + README.md.
-**스크립트 로드 순서**: `katex.min.js` → `marked@4` → `docsify-katex` 를 docsify 본체보다 먼저.
+**홍근선** — ㈜한국AI연구소 대표이사 · 삼성 DS사업부 딥러닝 전문 강사 ·
+성균관대학교 데이터사이언스융합학과 겸임교수 (gshong@ai-camp.kr)
