@@ -1,0 +1,112 @@
+/* 교재 md 를 화면·PDF 로 볼 때 쓰는 스타일.
+ *
+ * md 자체에는 글꼴 크기를 담을 방법이 없다. 크기는 **보는 쪽(뷰어·변환기)** 이 정한다.
+ * 그래서 md 본문은 건드리지 않고 이 파일 하나로 크기를 맞춘다.
+ *
+ * 쓰는 법
+ *   VS Code   설정 markdown.styles 에 이 파일 경로를 넣는다.
+ *   Typora    테마 폴더에 복사한 뒤 테마로 고른다.
+ *   pandoc    pandoc 1.1.md -s --css=_tools/교재.css -o 1.1.html
+ *             (PDF 는 --pdf-engine=weasyprint 를 함께 쓰면 이 CSS 가 그대로 먹는다)
+ */
+
+:root {
+    --본문pt: 11pt;
+    --코드pt: 9.5pt;    /* 본문 17cm 에서 한 줄 85자. VS Code 기본 미리보기는 14px=10.5pt 다 */
+    --본문폭: 17cm;
+    --그림최대폭: 16.1cm;   /* 코드 80자와 같은 폭 = 80 × 9.5pt × 0.6 */
+}
+
+body {
+    max-width: var(--본문폭);
+    margin: 0 auto;
+    font-size: var(--본문pt);
+    line-height: 1.7;
+    font-family: "Noto Sans KR", "맑은 고딕", "Malgun Gothic", sans-serif;
+}
+
+/* ── 코드 ──────────────────────────────────────────────────────────────
+ * 등폭 글꼴의 글자 폭은 대략 글자 크기의 0.6배다. 9.5pt 면 한 글자가 5.7pt = 2.01mm 이고
+ * 본문 폭 17cm 에 **85자**가 들어간다. 이 교재의 코드 중 가장 긴 줄은 97자이므로
+ * 그 몇 줄만 접힌다(11pt 였다면 73자를 넘는 줄이 전부 접혔다).
+ *   11pt → 73자,  9.5pt → 85자,  9pt → 90자,  8.5pt → 95자
+ * 접히는 것이 싫으면 아래 pre 의 white-space 를 pre 로 두고 가로 스크롤을 허용한다
+ * (화면에서는 스크롤이, 인쇄에서는 접기가 낫다).
+ *
+ * 참고: VS Code 마크다운 미리보기의 기본값은 14px = 10.5pt 다. 이 CSS 를 적용하지
+ * 않으면 코드도 그 값으로 보인다.
+ */
+pre,
+code,
+kbd,
+samp {
+    font-family: "D2Coding", "Consolas", "Menlo", monospace;
+    font-size: var(--코드pt);
+}
+
+pre {
+    line-height: 1.45;
+    padding: 0.7em 0.9em;
+    background: #f6f8fa;
+    border: 1px solid #e2e6ea;
+    border-radius: 5px;
+    white-space: pre-wrap;      /* 긴 줄을 접는다. 가로 스크롤을 원하면 pre 로 바꾼다 */
+    word-break: break-all;
+    overflow-x: auto;
+}
+
+pre code {
+    font-size: inherit;         /* 뷰어가 pre > code 에 또 배율을 먹이는 것을 막는다 */
+    background: none;
+    border: 0;
+    padding: 0;
+}
+
+/* 본문 중간의 짧은 코드는 주변 글자와 나란히 보이도록 살짝 키운다 */
+:not(pre) > code {
+    font-size: calc(var(--코드pt) * 0.95);
+    background: #f0f2f4;
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+}
+
+/* ── 그림 ──────────────────────────────────────────────────────────────
+ * md 가 폭을 지정하지 않으면 뷰어는 그림을 **원본 픽셀 크기**로 그린다. 그래서
+ * 캡처 해상도가 제각각이면 그림 안 글자 크기도 제각각으로 보인다. 여기서는 위아래를
+ * 막아 두기만 한다 — 그림마다 알맞은 폭은 `ada_pptx2md.imgsize` 로 따로 계산한다.
+ */
+img {
+    max-width: min(100%, var(--그림최대폭));
+    height: auto;
+    display: block;
+    margin: 1em auto;
+}
+
+/* 그림 바로 아래 이탤릭 한 줄을 그림 설명으로 본다 */
+p > em:only-child {
+    display: block;
+    text-align: center;
+    font-size: 0.9em;
+    color: #555;
+}
+
+table {
+    border-collapse: collapse;
+    font-size: 0.95em;
+}
+
+th,
+td {
+    border: 1px solid #d5d9de;
+    padding: 0.35em 0.6em;
+}
+
+@media print {
+    body {
+        max-width: none;
+    }
+
+    pre {
+        page-break-inside: avoid;
+    }
+}
