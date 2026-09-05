@@ -1,5 +1,7 @@
 # LLM 심화 — Transformer 와 LLMs
 
+> 📖 **웹 교재로 보기: https://ai-boostcamp.github.io/AgenticAI/**
+
 사전학습 LLM 을 **내 문제에 맞게 조정하고(Fine-tuning)**, **행동하는 시스템(AI
 Agent)으로 확장**하는 방법을 다루는 교재다. 강의 "Transformer 와 LLMs"(홍근선,
 ㈜한국AI연구소)의 슬라이드를 읽는 글로 다시 쓴 것으로, 모든 실습은 Google Colab
