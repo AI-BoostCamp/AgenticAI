@@ -8,3 +8,6 @@ _tools/ada_pptx2md/
 .DS_Store
 .smbdelete*
 desktop.ini
+# 보관함 (미사용 그림·리사이즈 원본)
+_보관_미사용그림/
+_보관_원본이미지/
